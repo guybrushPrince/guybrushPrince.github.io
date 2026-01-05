@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BPMNinvest Demo</title>
+</head>
+<body>
+<div class="content" id="js-drop-zone">
+
+    <div class="message intro">
+        <div class="logo" id="BPMNinvest-logo"></div>
+        <div class="note">
+            Drop BPMN diagram from your desktop, open an example with the upper drop-down menu, or <a id="js-create-diagram" href>create a new diagram</a> to get started.
+        </div>
+        <div class="survey">
+            <a href="https://guybrushprince.github.io/surveys/bpmninvest"><div id="survey-logo"></div></a>
+            <div class="note">
+                Take part in our survey and help to improve BPMNinvest!<br />
+                Simply click on the dinosaur to do so.
+            </div>
+        </div>
+    </div>
+
+    <div class="message error">
+        <div class="note">
+            <p>Ooops, we could not display the BPMN 2.0 diagram.</p>
+
+            <div class="details">
+                <span>cause of the problem</span>
+                <pre></pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="canvas" id="js-canvas"></div>
+</div>
+
+<div class="examples">
+    <label for="examples-opener">Change example:</label>
+    <select id="examples-opener">
+        <option value="none">Please select</option>
+        <option value="example.bpmn">Example</option>
+        <option value="fault-masking.bpmn">No fault masking (from the paper)</option>
+        <option value="fault-blocking.bpmn">No fault blocking (from the paper)</option>
+        <option value="fault-illusion.bpmn">No fault illusion (from the paper)</option>
+        <option value="no-visualization.bpmn">No visualization in BPMN Analyzer 2.0 (from the paper)</option>
+        <option value="lack-of-synchronization.bpmn">Lack of synchronization</option>
+        <option value="non-interrupting-boundary-event.bpmn">Non-interrupting boundary event</option>
+        <option value="wrong-loop-entry-1.bpmn">Parallel gateway as loop entry 1</option>
+        <option value="wrong-loop-entry-2.bpmn">Parallel gateway as loop entry 2</option>
+        <option value="deadlock-during-loop-initialization.bpmn">Deadlock during loop initialization</option>
+        <option value="possible-endless-loop.bpmn">Endless loop</option>
+
+        <option value="implicit-task-merge.bpmn">Implicit exclusive gateway (Synchronization) (taken from BPMN Analyzer 2.0)</option>
+        <option value="showcase.bpmn">Complex scenario (taken from BPMN Analyzer 2.0)</option>
+        <option value="reused-end-event.bpmn">Reused end event (Unique End Events) (taken from BPMN Analyzer 2.0)</option>
+        <option value="stuck.bpmn">Blocking PG (Termination) (taken from BPMN Analyzer 2.0)</option>
+        <option value="dead-activity.bpmn">Dead Activity (taken from BPMN Analyzer 2.0)</option>
+        <option value="pools-with-message-flows.bpmn">Counterexample with messages (taken from BPMN Analyzer 2.0)</option>
+        <option value="cyclic.bpmn">Quick fixes with cycles (taken from BPMN Analyzer 2.0)</option>
+        <!--<option value="dead-receive-task.bpmn">Dead Receive Task (taken from BPMN Analyzer 2.0)</option>
+        <option value="dead-mice.bpmn">Blocking MICE (Termination) (taken from BPMN Analyzer 2.0)</option>
+        <option value="starvation.bpmn">Message Starvation (Termination) (taken from BPMN Analyzer 2.0)</option>-->
+        <option value="livelock.bpmn">Livelock (Termination) (taken from BPMN Analyzer 2.0)</option>
+        <option value="dead_tasks_connected.bpmn">Connected Dead Activities (taken from BPMN Analyzer 2.0)</option>
+        <option value="order_handling.bpmn">Order handling example (taken from BPMN Analyzer 2.0)</option>
+
+    </select>
+</div>
+
+<ul class="button-row open">
+    <li>Open / New</li>
+    <li><button id="js-open-diagram" title="Open a BPMN file" class="active">BPMN File</button></li>
+    <li><button id="js-new-diagram" title="Create a new BPMN diagram" class="active">New diagram</button></li>
+</ul>
+<ul class="button-row download">
+    <li>Download</li>
+    <li><a id="js-download-diagram" href title="Download diagram as BPMN file">BPMN File</a></li>
+    <li><a id="js-download-svg" href title="Download diagram as SVG image">SVG Image</a></li>
+</ul>
+
+<div class="enable-analysis"></div>
+<div class="reachability-analysis"><button id="js-reachability-analysis" title="Check if a state is reachable on which all selected nodes are executable." class="active">Is possible?</button></div>
+
+<div class="analysis">
+    <div id="Safeness" class="fulfilled">Synchronization</div>
+    <div id="Safeness-icon" class="general-icon icon-check fulfilled"></div>
+    <div id="OptionToComplete" class="fulfilled">Guaranteed termination</div>
+    <div id="OptionToComplete-icon" class="general-icon icon-check fulfilled"></div>
+    <div id="ProperCompletion" class="fulfilled">Unique end event execution</div>
+    <div id="ProperCompletion-icon" class="general-icon icon-check fulfilled"></div>
+    <div id="NoDeadActivities" class="fulfilled">No dead activities</div>
+    <div id="NoDeadActivities-icon" class="general-icon icon-check fulfilled"></div>
+    <div id="BestPractices" class="fulfilled">Used best practices</div>
+    <div id="BestPractices-icon" class="general-icon icon-check fulfilled"></div>
+</div>
+
+<a href="https://www.uni-jena.de" id="fsu-logo" target="_blank" class="bjs-powered-by" title="Friedrich Schiller University Jena, German"></a>
+<a href="https://www.fsv.uni-jena.de/22912/dr-thomas-prinz" id="my-name" target="_blank" class="bjs-powered-by" title="Written by Thomas M. Prinz">Thomas M.<br/>Prinz</a>
+<a href="https://guybrushprince.github.io/surveys/bpmninvest.html" id="survey" target="_blank" class="bjs-powered-by" title="Take part in our survey">Take part in our survey</a>
+
+<div class="survey later">
+    <button id="close-survey" title="Close survey invitation">x</button>
+    <a href="https://guybrushprince.github.io/surveys/bpmninvest"><div id="survey-logo2"></div></a>
+    <div class="note">
+        Take part in our survey and help to improve BPMNinvest!<br />
+        Simply click on the dinosaur to do so.
+    </div>
+</div>
+
+<script src="bpmninvest.mjs"></script>
+</body>
+</html>
